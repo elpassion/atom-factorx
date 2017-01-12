@@ -6,7 +6,7 @@
   "keywords": [
   ],
   "activationCommands": {
-    "atom-workspace": "factorx:toggle"
+    "atom-workspace": "factorx:run"
   },
   "repository": "https://github.com/atom/factorx",
   "license": "MIT",

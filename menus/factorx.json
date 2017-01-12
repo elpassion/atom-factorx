@@ -2,8 +2,8 @@
   "context-menu": {
     "atom-text-editor": [
       {
-        "label": "Toggle factorx",
-        "command": "factorx:toggle"
+        "label": "Run FactorX",
+        "command": "factorx:run"
       }
     ]
   },
@@ -12,11 +12,11 @@
       "label": "Packages",
       "submenu": [
         {
-          "label": "factorx",
+          "label": "FactorX",
           "submenu": [
             {
-              "label": "Toggle",
-              "command": "factorx:toggle"
+              "label": "Run",
+              "command": "factorx:run"
             }
           ]
         }

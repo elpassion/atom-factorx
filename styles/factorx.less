@@ -4,5 +4,26 @@
 // for a full listing of what's available.
 @import "ui-variables";
 
-.factorx {
+.fx-tooltip {
+  position: absolute;
+  background-color: @button-background-color;
+  border-color: @button-border-color;
+  border-radius: @component-border-radius;
+  padding: @component-padding;
+  color: @text-color;
+  z-index: 9999;
+}
+
+.fx-tooltip-choices {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.fx-tooltip-choices__item {
+  padding: @component-icon-padding 0;
+}
+
+.fx-tooltip-choices__label {
+  margin: 0;
 }
