@@ -1,5 +1,5 @@
 {
   "atom-workspace": {
-    "cmd-alt-v": "factorx:run"
+    "ctrl-alt-v": "factorx:run"
   }
 }

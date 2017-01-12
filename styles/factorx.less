@@ -4,7 +4,7 @@
 // for a full listing of what's available.
 @import "ui-variables";
 
-.fx-tooltip {
+.fx-selectList {
   position: absolute;
   background-color: @button-background-color;
   border-color: @button-border-color;
@@ -14,16 +14,30 @@
   z-index: 9999;
 }
 
-.fx-tooltip-choices {
+.fx-selectList-choices {
   list-style: none;
   padding: 0;
   margin: 0;
+  min-width: 100px;
 }
 
-.fx-tooltip-choices__item {
+.fx-selectList-choices__item {
   padding: @component-icon-padding 0;
 }
 
-.fx-tooltip-choices__label {
+.fx-selectList-choices__label {
   margin: 0;
+}
+
+.fx-selectList-choices__radio {
+  display: none;
+}
+
+.fx-selectList__text {
+  line-height: @component-line-height;
+}
+
+.fx-selectList-choices__radio:focus + .fx-selectList-choices__text,
+.fx-selectList-choices__radio:checked + .fx-selectList-choices__text {
+  background-color: @background-color-highlight;
 }
