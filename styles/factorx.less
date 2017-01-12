@@ -9,7 +9,7 @@
   background-color: @button-background-color;
   border-color: @button-border-color;
   border-radius: @component-border-radius;
-  padding: @component-padding;
+  padding: @component-padding 0;
   color: @text-color;
   z-index: 9999;
 }
@@ -22,22 +22,28 @@
 }
 
 .fx-selectList-choices__item {
-  padding: @component-icon-padding 0;
+  padding: (@component-icon-padding / 2) 0;
+}
+
+.fx-selectList-choices__item:hover .fx-selectList-choices__text {
+  background-color: @background-color-highlight;
+  color: @text-color-highlight;
 }
 
 .fx-selectList-choices__label {
-  margin: 0;
+  display: block;
 }
 
 .fx-selectList-choices__radio {
   display: none;
 }
 
-.fx-selectList__text {
-  line-height: @component-line-height;
+.fx-selectList-choices__text {
+  display: block;
+  padding: (@component-padding / 2) @component-padding;
 }
 
-.fx-selectList-choices__radio:focus + .fx-selectList-choices__text,
+.fx-selectList-choices__radio.is-focused + .fx-selectList-choices__text,
 .fx-selectList-choices__radio:checked + .fx-selectList-choices__text {
   background-color: @background-color-highlight;
 }
