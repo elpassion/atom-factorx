@@ -13,7 +13,7 @@
     "atom": ">=1.0.0 <2.0.0"
   },
   "dependencies": {
-    "flow-factor": "0.0.2"
+    "flow-factor": "0.0.4"
   },
   "devDependencies": {
     "babel-eslint": "^7.1.1",
