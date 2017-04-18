@@ -5,7 +5,7 @@
   "description": "A short description of your package",
   "keywords": [],
   "activationCommands": {
-    "atom-workspace": "factorx:run"
+    "atom-workspace": "factorx:extractVariable"
   },
   "repository": "https://github.com/atom/factorx",
   "license": "MIT",

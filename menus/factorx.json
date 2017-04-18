@@ -2,8 +2,12 @@
   "context-menu": {
     "atom-text-editor": [
       {
-        "label": "Run FactorX",
-        "command": "factorx:run"
+        "label": "Extract variable",
+        "command": "factorx:extractVariable"
+      },
+      {
+        "label": "Extract constant",
+        "command": "factorx:extractConst"
       }
     ]
   },
@@ -15,8 +19,12 @@
           "label": "FactorX",
           "submenu": [
             {
-              "label": "Run",
-              "command": "factorx:run"
+              "label": "Extract variable",
+              "command": "factorx:extractVariable"
+            },
+            {
+              "label": "Extract constant",
+              "command": "factorx:extractConst"
             }
           ]
         }
