@@ -4,6 +4,13 @@
   "version": "0.0.0",
   "description": "A short description of your package",
   "keywords": [],
+  "scripts": {
+    "flow": "flow",
+    "test": "jest",
+    "watch": "jest --watch",
+    "flow-typed": "flow-typed install",
+    "lint": "eslint 'lib/**'"
+  },
   "activationCommands": {
     "atom-workspace": "factorx:extractVariable"
   },
@@ -12,11 +19,27 @@
   "engines": {
     "atom": ">=1.0.0 <2.0.0"
   },
+  "jest": {
+    "testEnvironment": "node"
+  },
   "dependencies": {
-    "factorx": "0.1.6"
+    "redux": "^3.6.0"
   },
   "devDependencies": {
-    "babel-eslint": "^7.1.1",
-    "eslint": "^3.13.1"
+    "babel-eslint": "^7.2.2",
+    "babel-jest": "^19.0.0",
+    "babel-plugin-syntax-flow": "^6.18.0",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-flow-strip-types": "^6.22.0",
+    "babel-preset-stage-0": "^6.24.1",
+    "babel-preset-env": "^1.4.0",
+    "eslint": "^3.19.0",
+    "eslint-config-airbnb-base": "^11.1.3",
+    "eslint-plugin-flowtype": "^2.30.4",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-promise": "^3.5.0",
+    "flow-bin": "^0.44.2",
+    "flow-typed": "^2.0.0",
+    "jest": "^19.0.2"
   }
 }
