@@ -1,5 +1,6 @@
 {
   "atom-workspace": {
-    "ctrl-alt-v": "factorx:run"
+    "ctrl-alt-v": "factorx:extractVariable",
+    "ctrl-alt-c": "factorx:extractConst"
   }
 }
