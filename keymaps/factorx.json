@@ -1,6 +1,7 @@
 {
   "atom-workspace": {
     "ctrl-alt-v": "factorx:extractVariable",
-    "ctrl-alt-c": "factorx:extractConst"
+    "ctrl-alt-c": "factorx:extractConst",
+    "ctrl-alt-r": "factorx:renameVariable"
   }
 }
