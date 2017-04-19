@@ -20,7 +20,9 @@
     "testEnvironment": "node"
   },
   "dependencies": {
-    "redux": "^3.6.0"
+    "redux": "^3.6.0",
+    "redux-saga": "^0.14.6",
+    "redux-saga-test-plan": "^2.4.3"
   },
   "devDependencies": {
     "babel-eslint": "^7.2.2",

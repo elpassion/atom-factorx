@@ -5,6 +5,7 @@ module.exports = {
   env: {
     node: true,
     jest: true,
+    browser: true,
   },
   globals: {
     atom: false,
