@@ -7,7 +7,11 @@
       },
       {
         "label": "Extract constant",
-        "command": "factorx:extractConst"
+        "command": "factorx:extractConstant"
+      },
+      {
+        "label": "Rename variable",
+        "command": "factorx:renameVariable"
       }
     ]
   },
@@ -24,7 +28,11 @@
             },
             {
               "label": "Extract constant",
-              "command": "factorx:extractConst"
+              "command": "factorx:extractConstant"
+            },
+            {
+              "label": "Rename variable",
+              "command": "factorx:renameVariable"
             }
           ]
         }
