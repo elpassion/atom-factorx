@@ -1,6 +1,6 @@
 {
   "name": "factorx",
-  "main": "./lib/factorx",
+  "main": "./lib/factorx.js",
   "version": "0.0.0",
   "description": "A short description of your package",
   "keywords": [],
@@ -9,7 +9,8 @@
     "test": "jest",
     "watch": "jest --watch",
     "flow-typed": "flow-typed install",
-    "lint": "eslint 'lib/**'"
+    "lint": "eslint 'src/**'",
+    "build": "babel src -d lib"
   },
   "repository": "https://github.com/atom/factorx",
   "license": "MIT",
@@ -25,6 +26,7 @@
     "redux-saga-test-plan": "^2.4.3"
   },
   "devDependencies": {
+    "babel-cli": "^6.18.0",
     "babel-eslint": "^7.2.2",
     "babel-jest": "^19.0.0",
     "babel-plugin-syntax-flow": "^6.18.0",

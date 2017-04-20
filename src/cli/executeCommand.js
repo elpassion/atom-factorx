@@ -1,5 +1,3 @@
-'use babel';
-
 // @flow
 
 // eslint-disable-next-line max-len
@@ -29,7 +27,7 @@ const executeCommand = ({
   command,
   args,
   input,
-}: { command: string, args: Array<any>, input: string }) => {
+}: { command: string, args: Array<any>, input: string }): Promise<any> => {
   let bufferedProcess;
   return new Promise((resolve, reject) => {
     const flowCommand = getFlowFactorCommand();
@@ -66,83 +64,4 @@ const executeCommand = ({
   });
 };
 
-// eslint-disable-next-line no-unused-vars
-type renameVariableResult = {
-  status: string,
-  code: string,
-  cursorPosition: {
-    start: number,
-    end: number,
-  },
-};
-
-export const renameVariable = (
-  input: string,
-  startPosition: number,
-  endPosition: number,
-  newName: string,
-) =>
-  executeCommand({
-    command: 'rename-identifier',
-    args: [startPosition, endPosition, newName],
-    input,
-  });
-
-type Expression = {
-  value: string,
-  position: {
-    start: number,
-    end: number,
-  },
-};
-
-// eslint-disable-next-line no-unused-vars
-type getExpressionsResult = {
-  status: string,
-  expressions: Array<Expression>,
-};
-
-export const getExpressions = (input: string, startPosition: number, endPosition: number) =>
-  executeCommand({
-    command: 'get-expressions',
-    args: [startPosition, endPosition],
-    input,
-  });
-
-// eslint-disable-next-line no-unused-vars
-type getExpressionOccurrencesResult = {
-  status: string,
-  expressions: Array<Expression>,
-};
-
-export const getExpressionOccurrences = (
-  input: string,
-  startPosition: number,
-  endPosition: number,
-) =>
-  executeCommand({
-    command: 'get-expression-occurrences',
-    args: [startPosition, endPosition],
-    input,
-  });
-
-// eslint-disable-next-line no-unused-vars
-type extractVariableResult = {
-  status: string,
-  code: string,
-  cursorPosition: {
-    start: number,
-    end: number,
-  },
-};
-
-export const extractVariable = (
-  type: 'constant' | 'variable',
-  input: string,
-  ...positions: Array<number>
-) =>
-  executeCommand({
-    command: `extract-${type}`,
-    args: positions,
-    input,
-  });
+export default executeCommand;

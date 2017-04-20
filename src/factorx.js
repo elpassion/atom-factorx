@@ -1,5 +1,3 @@
-'use babel';
-
 // @flow
 
 // eslint-disable-next-line max-len
@@ -8,7 +6,8 @@ import { CompositeDisposable } from 'atom';
 import VariableInput from './VariableInput';
 import SelectList from './SelectList';
 import { renameVariable, getExpressions, getExpressionOccurrences, extractVariable } from './cli';
-import { getPositionFromIndexesPosition, getIndexesPositionFromBufferPosition } from './helpers';
+import type { codeResult } from './cli';
+import FxSelection from './FxSelection';
 
 class FactorX {
   subscriptions: atom$CompositeDisposable;
@@ -45,20 +44,15 @@ class FactorX {
     this.createFlow(async () => {
       try {
         const buffer = this.editor.getBuffer();
-        const currentIndexPosition = this.getCurrentIndexesPosition();
         const getExpressionsResult = await getExpressions(
           buffer.getText(),
-          currentIndexPosition.start,
-          currentIndexPosition.end,
+          ...FxSelection.current(this.editor).firstIndexRanges(),
         );
-
         const { expressions } = getExpressionsResult;
 
-        const formattedChoices = expressions.map(choice => ({
-          value: choice.value,
-          indexPosition: choice.position,
-          position: getPositionFromIndexesPosition(buffer, choice.position),
-        }));
+        const formattedChoices = expressions.map(expression =>
+          FxSelection.fromFxExpressionForBuffer(expression, buffer),
+        );
 
         let selectedExpression;
 
@@ -68,29 +62,25 @@ class FactorX {
           selectedExpression = formattedChoices[0];
         }
 
-        // eslint-disable-next-line no-console
-        console.log(selectedExpression);
-
         const getExpressionOccurrencesResult = await getExpressionOccurrences(
           buffer.getText(),
-          selectedExpression.indexPosition.start,
-          selectedExpression.indexPosition.end,
+          ...selectedExpression.firstIndexRanges(),
         );
 
         const { expressions: occurrences } = getExpressionOccurrencesResult;
         const formattedOccurrences = [
-          {
-            value: 'This occurrence only',
-            indexPosition: [occurrences[0].position],
-            position: [getPositionFromIndexesPosition(buffer, occurrences[0].position)],
-          },
-          {
-            value: `All ${occurrences.length} occurrences`,
-            indexPosition: occurrences.map(occurrence => occurrence.position),
-            position: occurrences.map(occurrence =>
-              getPositionFromIndexesPosition(buffer, occurrence.position),
-            ),
-          },
+          FxSelection.fromFxExpressionForBuffer(
+            {
+              ...occurrences[0],
+              value: 'This occurrence only',
+            },
+            buffer,
+          ),
+          FxSelection.fromMultipleFxExpressionsForBuffer(
+            `All ${occurrences.length} occurrences`,
+            occurrences,
+            buffer,
+          ),
         ];
 
         let selectedOccurrences;
@@ -101,18 +91,10 @@ class FactorX {
           selectedOccurrences = formattedOccurrences[0];
         }
 
-        const formattedSelectedOccurrences = selectedOccurrences.indexPosition.reduce(
-          (acc, position) => [...acc, position.start, position.end],
-          [],
-        );
-
-        // eslint-disable-next-line no-console
-        console.log(formattedSelectedOccurrences);
-
         const extractVariableResult = await extractVariable(
           type,
           buffer.getText(),
-          ...formattedSelectedOccurrences,
+          ...selectedOccurrences.indexRanges(),
         );
 
         this.replaceCodeWithResult(extractVariableResult);
@@ -129,11 +111,9 @@ class FactorX {
     this.createFlow(async () => {
       try {
         const newVarName = await this.variableInput.open('');
-        const currentIndexPosition = this.getCurrentIndexesPosition(this.editor);
         const renameResult = await renameVariable(
           this.editor.getBuffer().getText(),
-          currentIndexPosition.start,
-          currentIndexPosition.end,
+          ...FxSelection.current(this.editor).firstIndexRanges(),
           newVarName,
         );
         this.replaceCodeWithResult(renameResult, this.editor);
@@ -155,19 +135,16 @@ class FactorX {
     }
   };
 
-  getCurrentIndexesPosition() {
-    const currentPosition = this.editor.getSelectedBufferRange();
-    const buffer = this.editor.getBuffer();
-    return getIndexesPositionFromBufferPosition(buffer, currentPosition);
-  }
-
-  replaceCodeWithResult(result: Object) {
+  replaceCodeWithResult(result: codeResult) {
     const cursorPositionPriorToFormat = this.editor.getCursorScreenPosition();
     const buffer = this.editor.getBuffer();
     buffer.setText(result.code);
     this.editor.setCursorBufferPosition(cursorPositionPriorToFormat);
-    const range = getPositionFromIndexesPosition(buffer, result.cursorPosition);
-    this.editor.setSelectedBufferRange(range);
+    const range = FxSelection.fromFxExpressionForBuffer(
+      { position: result.cursorPosition, value: '' },
+      buffer,
+    );
+    this.editor.setSelectedBufferRange(range.positions[0]);
   }
 
   deactivate() {
@@ -175,4 +152,4 @@ class FactorX {
   }
 }
 
-export default new FactorX();
+module.exports = new FactorX();

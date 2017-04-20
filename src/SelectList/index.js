@@ -1,8 +1,7 @@
-'use babel';
-
 // @flow
 
 import { OFFSET_TOP } from '../constants';
+import FxSelection from '../FxSelection';
 
 export default class SelectList {
   chosenIndex: number;
@@ -11,7 +10,7 @@ export default class SelectList {
   parentEditor: atom$TextEditor;
   resolveInputPromise: (choice: any) => void;
   rejectInputPromise: () => void;
-  choices: Array<any>;
+  choices: Array<FxSelection>;
 
   constructor() {
     this.chosenIndex = 0;
@@ -24,7 +23,7 @@ export default class SelectList {
     this.domElement.setAttribute('tabindex', '-1');
   }
 
-  open(choices: Array<any>) {
+  open(choices: Array<FxSelection>): Promise<FxSelection> {
     this.choices = choices;
     const inputPromise = new Promise((resolve, reject) => {
       this.resolveInputPromise = resolve;
@@ -115,10 +114,10 @@ export default class SelectList {
 
   updateEditorSelection() {
     const choice = this.choices[this.chosenIndex];
-    const position = Array.isArray(choice.position) ? choice.position : [choice.position];
     const choiceInputs = this.selectList.querySelectorAll('input');
     choiceInputs[this.chosenIndex].classList.add('is-focused');
-    this.parentEditor.setSelectedBufferRanges(position);
+    const newRanges: Array<atom$Range> = (choice.positions: any);
+    this.parentEditor.setSelectedBufferRanges(newRanges);
   }
 
   handleChoice = (e: Event) => {
