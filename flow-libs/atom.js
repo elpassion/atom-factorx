@@ -828,7 +828,7 @@ declare class atom$TextEditor extends atom$Model {
   getSelections(): Array<atom$Selection>,
   selectToBufferPosition(point: atom$Point): void,
   setSelectedBufferRange(
-    bufferRange: atom$Range,
+    bufferRange: atom$RangeLike,
     options?: {
       reversed?: boolean,
       preserveFolds?: boolean,
@@ -1166,6 +1166,7 @@ declare class atom$BufferedProcess {
   ): IDisposable,
   // Helper Methods
   kill(): void,
+  process: child_process$ChildProcess,
 }
 
 declare class atom$Clipboard {
