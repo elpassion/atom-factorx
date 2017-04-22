@@ -99,7 +99,7 @@ class FactorX {
 
         this.replaceCodeWithResult(extractVariableResult);
 
-        this.renameVariableFlow();
+        // this.renameVariableFlow();
       } catch (e) {
         // eslint-disable-next-line no-console
         console.error(e);
@@ -140,11 +140,12 @@ class FactorX {
     const buffer = this.editor.getBuffer();
     buffer.setText(result.code);
     this.editor.setCursorBufferPosition(cursorPositionPriorToFormat);
-    const range = FxSelection.fromFxExpressionForBuffer(
-      { position: result.cursorPosition, value: '' },
-      buffer,
+
+    const ranges = result.cursorPositions.map(
+      position =>
+        FxSelection.fromFxExpressionForBuffer({ position, value: '' }, buffer).positions[0],
     );
-    this.editor.setSelectedBufferRange(range.positions[0]);
+    this.editor.setSelectedBufferRanges(ranges);
   }
 
   deactivate() {
