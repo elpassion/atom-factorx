@@ -39,11 +39,11 @@ const executeCommand = ({
         options: {},
         stdout: (data: string) => {
           try {
-            const parsedData: { status: string } = JSON.parse(data);
+            const parsedData: { status: string, error?: { name: string } } = JSON.parse(data);
             if (parsedData.status === 'ok') {
               resolve(parsedData);
             } else {
-              reject(parsedData);
+              reject(parsedData.error);
             }
           } catch (error) {
             reject(error);

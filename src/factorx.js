@@ -49,7 +49,6 @@ class FactorX {
           ...FxSelection.current(this.editor).firstIndexRanges(),
         );
         const { expressions } = getExpressionsResult;
-
         const formattedChoices = expressions.map(expression =>
           FxSelection.fromFxExpressionForBuffer(expression, buffer),
         );
@@ -98,11 +97,15 @@ class FactorX {
         );
 
         this.replaceCodeWithResult(extractVariableResult);
-
-        // this.renameVariableFlow();
       } catch (e) {
-        // eslint-disable-next-line no-console
-        console.error(e);
+        if (e.name === 'ExpressionNotFoundError') {
+          atom.notifications.addWarning("Didn't find an expression here :/");
+        } else {
+          atom.notifications.addError('Something went wrong :(');
+          // eslint-disable-next-line no-console
+          console.error(e);
+          throw e;
+        }
       }
     })();
   };

@@ -12,6 +12,7 @@ type fxExpression = {
 type renameVariableResult = {
   status: string,
   code: string,
+  error?: { name: string },
   cursorPositions: Array<{
     start: number,
     end: number,
@@ -33,6 +34,7 @@ export const renameVariable = (
 type getExpressionsResult = {
   status: string,
   expressions: Array<fxExpression>,
+  error?: { name: string },
 };
 
 export const getExpressions = (
@@ -49,6 +51,7 @@ export const getExpressions = (
 type getExpressionOccurrencesResult = {
   status: string,
   expressions: Array<fxExpression>,
+  error?: { name: string },
 };
 
 export const getExpressionOccurrences = (
@@ -69,6 +72,7 @@ type extractVariableResult = {
     start: number,
     end: number,
   }>,
+  error?: { name: string },
 };
 
 export const extractVariable = (
