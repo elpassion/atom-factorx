@@ -1,18 +1,24 @@
 {
-  "name": "factorx",
+  "name": "factorx-atom",
   "main": "./lib/factorx.js",
-  "version": "0.0.0",
-  "description": "A short description of your package",
-  "keywords": [],
+  "version": "0.2.0",
+  "description": "An atom package for the factorX tool.",
+  "keywords": [
+    "atom",
+    "javascript",
+    "factorx",
+    "refactoring"
+  ],
   "scripts": {
     "flow": "flow",
     "test": "jest",
     "watch": "jest --watch",
     "flow-typed": "flow-typed install",
     "lint": "eslint 'src/**'",
-    "build": "babel src -d lib"
+    "build": "babel src -d lib",
+    "compile": "babel src -d lib --watch"
   },
-  "repository": "https://github.com/atom/factorx",
+  "repository": "https://github.com/elpassion/factorx-atom",
   "license": "MIT",
   "engines": {
     "atom": ">=1.0.0 <2.0.0"
@@ -20,11 +26,7 @@
   "jest": {
     "testEnvironment": "node"
   },
-  "dependencies": {
-    "redux": "^3.6.0",
-    "redux-saga": "^0.14.6",
-    "redux-saga-test-plan": "^2.4.3"
-  },
+  "dependencies": {},
   "devDependencies": {
     "babel-cli": "^6.18.0",
     "babel-eslint": "^7.2.2",
