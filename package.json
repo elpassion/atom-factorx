@@ -1,7 +1,7 @@
 {
   "name": "factorx-atom",
   "main": "./lib/factorx.js",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "An atom package for the factorX tool.",
   "keywords": [
     "atom",
